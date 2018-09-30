@@ -15,8 +15,5 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserInfoController {
     @Autowired
     private UserInfoService userInfoService;
-    @RequestMapping(value = "/getUserInfo")
-    public UserInfo getUserInfo(){
-        return userInfoService.findByUsername("管理员");
-    }
+
 }

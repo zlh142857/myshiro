@@ -17,13 +17,23 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
-import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
 
 public class MyShiroRealm extends AuthorizingRealm {
+    /*进行角色的添加和权限的添加。
+
+authorizationInfo.addRole(role.getRole());
+
+authorizationInfo.addStringPermission(p.getPermission());
+
+当然也可以添加集合：
+
+authorizationInfo.setRoles(roles);
+
+authorizationInfo.setStringPermissions(stringPermissions);*/
     @Autowired
     private UserInfoService userInfoService;
     /**
@@ -108,18 +118,18 @@ public class MyShiroRealm extends AuthorizingRealm {
         //账号判断;
         //加密方式;
         //交给AuthenticatingRealm使用CredentialsMatcher进行密码匹配，如果觉得人家的不好可以自定义实现
-        SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(
+        /*SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(
                 userInfo, //用户名
                 userInfo.getPassword(), //密码
                 ByteSource.Util.bytes(userInfo.getCredentialsSalt()),//salt=username+salt
                 getName()  //realm name
-        );
+        );*/
         //明文: 若存在，将此用户存放到登录认证info中，无需自己做密码对比，Shiro会为我们进行密码对比校验
-//      SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(
-//           userInfo, //用户名
-//           userInfo.getPassword(), //密码
-//             getName()  //realm name
-//      );
+        SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(
+             userInfo, //用户名
+             userInfo.getPassword(), //密码
+             getName()  //realm name
+        );
         return authenticationInfo;
     }
 

@@ -51,6 +51,18 @@ public class ShiroConfiguration {
     @Bean
     public SecurityManager securityManager(){
         DefaultWebSecurityManager securityManager =  new DefaultWebSecurityManager();
+        //设置realm.
+        securityManager.setRealm(myShiroRealm());
         return securityManager;
+    }
+    /**
+     * 身份认证realm;将realm注入到SecurityManager中
+     * (这个需要自己写，账号密码校验；权限等)
+     * @return
+     */
+    @Bean
+    public MyShiroRealm myShiroRealm(){
+        MyShiroRealm myShiroRealm = new MyShiroRealm();
+        return myShiroRealm;
     }
 }

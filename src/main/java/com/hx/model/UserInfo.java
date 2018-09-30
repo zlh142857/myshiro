@@ -30,7 +30,7 @@ public class UserInfo implements Serializable {
 
 
     @ManyToMany(fetch=FetchType.EAGER)//存在多对多关系,关闭懒加载,立即从数据库中进行加载数据;
-    @JoinTable(name = "SysUserRole", joinColumns = { @JoinColumn(name = "uid") }, inverseJoinColumns ={@JoinColumn(name = "roleId") })
+    @JoinTable(name = "sys_user_role", joinColumns = { @JoinColumn(name = "uid") }, inverseJoinColumns ={@JoinColumn(name = "role_id") })
     //name关联表的表名,joinColumns数据库表关联的键,inverseJoinColumns实体类关联的键
     private List<SysRole> roleList;// 一个用户具有多个角色
 

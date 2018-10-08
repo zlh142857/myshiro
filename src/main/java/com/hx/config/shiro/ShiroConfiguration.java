@@ -5,6 +5,7 @@ package com.hx.config.shiro;/*
  *@功能:shiro 配置类
  */
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
+import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
@@ -55,6 +56,8 @@ public class ShiroConfiguration {
         DefaultWebSecurityManager securityManager =  new DefaultWebSecurityManager();
         //设置realm.
         securityManager.setRealm(myShiroRealm());
+        //注入缓存管理器;
+        securityManager.setCacheManager(ehCacheManager());//这个如果执行多次，也是同样的一个对象;
         return securityManager;
     }
     /**
@@ -105,5 +108,28 @@ public class ShiroConfiguration {
         AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor = new AuthorizationAttributeSourceAdvisor();
         authorizationAttributeSourceAdvisor.setSecurityManager(securityManager);
         return authorizationAttributeSourceAdvisor;
+    }
+    /**
+     *
+     * 功能描述: 以下部分是shiro缓存,用于第一次访问后,缓存处理
+     *
+     * @param:
+     * @return:
+     * @auther: 张立恒
+     * @date: 2018/10/8 14:54
+     */
+    /**
+     * shiro缓存管理器;
+     * 需要注入对应的其它的实体类中：
+     * 1、安全管理器：securityManager
+     * 可见securityManager是整个shiro的核心；
+     * @return
+     */
+    @Bean
+    public EhCacheManager ehCacheManager(){
+        System.out.println("ShiroConfiguration.getEhCacheManager()");
+        EhCacheManager cacheManager = new EhCacheManager();
+        cacheManager.setCacheManagerConfigFile("classpath:config/ehcache-shiro.xml");
+        return cacheManager;
     }
 }

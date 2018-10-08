@@ -6,6 +6,7 @@ package com.hx.model;/*
  */
 
 
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
@@ -109,7 +110,6 @@ public class UserInfo implements Serializable {
                 ", password='" + password + '\'' +
                 ", salt='" + salt + '\'' +
                 ", state=" + state +
-                ", roleList=" + roleList +
                 '}';
     }
 }

@@ -5,7 +5,9 @@ package com.hx.dao;
 import com.hx.model.UserInfo;
 import org.springframework.data.repository.CrudRepository;
 
-public interface UserInfoRepository extends CrudRepository<UserInfo,Long> {
-    /**通过username查找用户信息;*/
+public interface UserInfoRepository extends CrudRepository<UserInfo, Long> {
     UserInfo findByUsername(String username);
+    /**通过username查找用户信息;*/
+    /*@Query(value="SELECT uid,name,username,password,salt,state FROM user_info WHERE username=:username",nativeQuery = true)
+    UserInfo findByUsername(@Param("username") String username);*/
 }

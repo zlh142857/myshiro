@@ -6,6 +6,7 @@ package com.hx.model;/*
  */
 
 
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
@@ -118,7 +119,6 @@ public class SysPermission implements Serializable {
                 ", parentId=" + parentId +
                 ", parentIds='" + parentIds + '\'' +
                 ", available=" + available +
-                ", roles=" + roles +
                 '}';
     }
 }

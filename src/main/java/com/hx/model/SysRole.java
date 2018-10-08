@@ -5,7 +5,6 @@ package com.hx.model;/*
  *@功能:系统角色实体类
  */
 
-import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -90,7 +89,6 @@ public class SysRole implements Serializable {
                 ", description='" + description + '\'' +
                 ", available=" + available +
                 ", permissions=" + permissions +
-                ", userInfos=" + userInfos +
                 '}';
     }
 }

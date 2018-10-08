@@ -30,3 +30,11 @@ spring:
   properties:
     hibernate:
       dialect : org.hibernate.dialect.MySQL5Dialect
+#热部署生效
+  devtools:
+    restart:
+      enabled: true
+#设置重启的目录
+      additional-paths: src/main/java
+#classpath目录下的WEB-INF文件夹内容修改不重启
+      exclude: WEB-INF/**

@@ -13,7 +13,7 @@ import org.apache.shiro.util.ByteSource;
 
 public class Md5 {
     public static String newpassword(String password,String username,String salt){
-        int hashIterations=2;
+        int hashIterations =2;
         String algorithmName="md5";
         String newPassword = new SimpleHash(
                 algorithmName,

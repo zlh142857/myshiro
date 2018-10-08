@@ -12,7 +12,7 @@ import org.apache.shiro.util.ByteSource;
 
 public class Salt {
     public static String salt(){
-        RandomNumberGenerator randomNumberGenerator = new SecureRandomNumberGenerator();
+        RandomNumberGenerator randomNumberGenerator =new SecureRandomNumberGenerator();
         return randomNumberGenerator.nextBytes().toHex();
     }
 }

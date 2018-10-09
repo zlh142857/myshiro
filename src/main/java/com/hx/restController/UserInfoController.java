@@ -5,13 +5,7 @@ package com.hx.restController;/*
  *@功能:
  */
 
-import com.hx.config.md5.Md5;
-import com.hx.config.md5.Salt;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.apache.shiro.crypto.RandomNumberGenerator;
-import org.apache.shiro.crypto.SecureRandomNumberGenerator;
-import org.apache.shiro.crypto.hash.SimpleHash;
-import org.apache.shiro.util.ByteSource;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -47,4 +41,7 @@ public class UserInfoController {
     public String userDel(){
         return "userInfoDel";
     }
+
+
+
 }

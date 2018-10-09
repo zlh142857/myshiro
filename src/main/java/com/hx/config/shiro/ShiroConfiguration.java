@@ -45,11 +45,15 @@ public class ShiroConfiguration {
         //配置记住我或认证通过可以访问的地址
         filterChainDefinitionMap.put("/index", "user");
         filterChainDefinitionMap.put("/", "user");
-
+        //开放登陆,注册接口
+        filterChainDefinitionMap.put("/login", "anon");
+        filterChainDefinitionMap.put("/regiset", "anon");
+        filterChainDefinitionMap.put("/toRegiset/**", "anon");
         //<!-- 过滤链定义，从上向下顺序执行，一般将 /**放在最为下边 -->:这是一个坑呢，一不小心代码就不好使了;
         //<!-- authc:所有url都必须认证通过才可以访问; anon:所有url都都可以匿名访问-->
+        //其余接口一律拦截
         filterChainDefinitionMap.put("/**", "authc");
-        // 如果不设置默认会自动寻找Web工程根目录下的"/login.jsp"页面,跳转到登录页面的代码
+        // 如果不设置默认会自动寻找Web工程根目录下的"/login.html"页面,跳转到登录页面的代码
         shiroFilterFactoryBean.setLoginUrl("/login");
         // 登录成功后要跳转的链接
         shiroFilterFactoryBean.setSuccessUrl("/index");

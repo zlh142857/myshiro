@@ -5,12 +5,13 @@ package com.hx.controller;/*
  *@功能:跳转页面
  */
 
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.subject.Subject;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
@@ -57,6 +58,17 @@ public class HomeController {
     @RequestMapping(value="/403")
     public String a403(){
         logger.info("用户进入403.html,报错了");
-        return"403";
+        return "/403";
+    }
+    @RequestMapping(value="/regiset")
+    public String regiset(){
+        logger.info("用户进入regiset.html");
+        return "/regiset";
+    }
+    @RequestMapping(value = "/logout")
+    public void logout() {
+        Subject subject = SecurityUtils.getSubject();
+        //注销
+        subject.logout();
     }
 }

@@ -5,34 +5,20 @@ package com.hx.controller;/*
  *@功能:跳转页面
  */
 
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.IncorrectCredentialsException;
-import org.apache.shiro.authc.UnknownAccountException;
-import org.apache.shiro.subject.Subject;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.Map;
-
 @Controller
 public class HomeController {
     private org.slf4j.Logger logger = LoggerFactory.getLogger(this.getClass());
-    //"/"或"/index",跳转至index.html
-    @RequestMapping({"/","/index"})
-    public String index(){
-        logger.info("用户进入index.html");
-        return"/index";
-    }
 
-    @RequestMapping(value="/login")
+    /*@RequestMapping(value="/login")
     public String login(HttpServletRequest request, Map<String, Object> map) throws Exception {
         logger.info("HomeController.login()");
         // 登录失败从request中获取shiro处理的异常信息。
         // shiroLoginFailure:就是shiro异常类的全类名.
         String exception = (String) request.getAttribute("shiroLoginFailure");
-
         logger.info("exception=" + exception);
         String msg = "";
         if (exception != null) {
@@ -53,22 +39,26 @@ public class HomeController {
         map.put("msg", msg);
         // 此方法不处理登录成功,由shiro进行处理.
         return "/login";
-    }
+    }*/
 
-    @RequestMapping(value="/403")
+    /*@RequestMapping(value="/403")
     public String a403(){
         logger.info("用户进入403.html,报错了");
         return "/403";
-    }
-    @RequestMapping(value="/regiset")
+    }*/
+    /**
+     *
+     * 功能描述:注册跳转页面
+     *
+     * @param: 
+     * @return: 
+     * @auther: 张立恒
+     * @date: 2018/10/9 15:35
+     */
+    /*@RequestMapping(value="/regiset")
     public String regiset(){
         logger.info("用户进入regiset.html");
         return "/regiset";
-    }
-    @RequestMapping(value = "/logout")
-    public void logout() {
-        Subject subject = SecurityUtils.getSubject();
-        //注销
-        subject.logout();
-    }
+    }*/
+
 }

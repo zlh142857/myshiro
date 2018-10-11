@@ -5,8 +5,10 @@ package com.hx.restController;/*
  *@功能:
  */
 
+import net.sf.json.JSONObject;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -19,8 +21,11 @@ public class UserInfoController {
      */
     @RequestMapping("/userList")
     @RequiresPermissions("userInfo:view")//权限管理的注解
+    @ResponseBody
     public String userInfo(){
-        return "userInfo";
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("msg", "userInfo");
+        return jsonObject.toString();
     }
 
     /**

@@ -20,6 +20,15 @@ import java.util.Map;
 
 @Configuration
 public class ShiroConfiguration {
+    /*@Value("${spring.redis.shiro.host}")
+    private String host;
+    @Value("${spring.redis.shiro.port}")
+    private int port;
+    @Value("${spring.redis.shiro.timeout}")
+    private int timeout;
+    @Value("${spring.redis.shiro.password}")
+    private String password;
+*/
     /**
      * ShiroFilterFactoryBean 处理拦截资源文件问题。
      * 注意：单独一个ShiroFilterFactoryBean配置是会报错的，因为在
@@ -39,26 +48,30 @@ public class ShiroConfiguration {
         shiroFilterFactoryBean.setSecurityManager(securityManager);
         //拦截器.
         Map<String,String> filterChainDefinitionMap = new LinkedHashMap<String,String>();
+
         //配置退出过滤器,其中的具体的退出代码Shiro已经替我们实现了
-        filterChainDefinitionMap.put("/logout", "logout");
+        filterChainDefinitionMap.put("/toLogin/logout", "logout");
 
         //配置记住我或认证通过可以访问的地址
-        filterChainDefinitionMap.put("/index", "user");
-        filterChainDefinitionMap.put("/", "user");
-        //开放登陆,注册接口
-        filterChainDefinitionMap.put("/login", "anon");
-        filterChainDefinitionMap.put("/regiset", "anon");
+        /*filterChainDefinitionMap.put("/index", "user");
+        filterChainDefinitionMap.put("/", "user");*/
+        //开放登录方法接口
+        filterChainDefinitionMap.put("/toLogin/**", "anon");
+        //开放注册接口
+        //filterChainDefinitionMap.put("/regiset", "anon");
         filterChainDefinitionMap.put("/toRegiset/**", "anon");
         //<!-- 过滤链定义，从上向下顺序执行，一般将 /**放在最为下边 -->:这是一个坑呢，一不小心代码就不好使了;
         //<!-- authc:所有url都必须认证通过才可以访问; anon:所有url都都可以匿名访问-->
         //其余接口一律拦截
         filterChainDefinitionMap.put("/**", "authc");
         // 如果不设置默认会自动寻找Web工程根目录下的"/login.html"页面,跳转到登录页面的代码
-        shiroFilterFactoryBean.setLoginUrl("/login");
+        //shiroFilterFactoryBean.setLoginUrl("/login");
+        //配置shiro默认登录界面地址，前后端分离中登录界面跳转应由前端路由控制，后台仅返回json数据
+        shiroFilterFactoryBean.setLoginUrl("/unauth");
         // 登录成功后要跳转的链接
-        shiroFilterFactoryBean.setSuccessUrl("/index");
+        //shiroFilterFactoryBean.setSuccessUrl("/index");
         //未授权界面;
-        shiroFilterFactoryBean.setUnauthorizedUrl("/403");
+        //shiroFilterFactoryBean.setUnauthorizedUrl("/403");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return shiroFilterFactoryBean;
     }
@@ -67,6 +80,8 @@ public class ShiroConfiguration {
         DefaultWebSecurityManager securityManager =  new DefaultWebSecurityManager();
         //设置realm.
         securityManager.setRealm(myShiroRealm());
+        // 自定义session管理 使用redis
+        //securityManager.setSessionManager(sessionManager());
         //注入缓存管理器;
         securityManager.setCacheManager(ehCacheManager());//这个如果执行多次，也是同样的一个对象;
         //注入记住我管理器;
@@ -179,4 +194,6 @@ public class ShiroConfiguration {
         cookieRememberMeManager.setCookie(rememberMeCookie());
         return cookieRememberMeManager;
     }
+
+
 }

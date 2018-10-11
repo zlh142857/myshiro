@@ -20,8 +20,6 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.List;
-
 
 public class MyShiroRealm extends AuthorizingRealm {
     /*进行角色的添加和权限的添加。
@@ -74,8 +72,8 @@ authorizationInfo.setStringPermissions(stringPermissions);*/
         //设置角色信息.
         //支持 Set集合,
         //用户的角色对应的所有权限，如果只使用角色定义访问权限，下面的四行可以不要
-        List<SysRole> roleList=userInfo.getRoleList();
-        /*for (SysRole role : roleList) {
+        /*List<SysRole> roleList=userInfo.getRoleList();
+        for (SysRole role : roleList) {
             authorizationInfo.addStringPermissions(role.getPermissionsName());
         }*/
         for(SysRole role:userInfo.getRoleList()){
@@ -138,16 +136,16 @@ authorizationInfo.setStringPermissions(stringPermissions);*/
      * 将权限对象中的权限code取出.
      * @param permissions
      * @return
-     */
-//  public Set<String> getStringPermissions(Set<SysPermission> permissions){
-//     Set<String> stringPermissions = new HashSet<String>();
-//     if(permissions != null){
-//         for(SysPermission p : permissions) {
-//            stringPermissions.add(p.getPermission());
-//          }
-//     }
-//       return stringPermissions;
-//  }
+     * */
+    /*public Set<String> getStringPermissions(Set<SysPermission> permissions){
+        Set<String> stringPermissions = new HashSet<String>();
+        if(permissions != null){
+            for(SysPermission p : permissions) {
+            stringPermissions.add(p.getPermission());
+            }
+        }
+        return stringPermissions;
+    }*/
 
 
 }
